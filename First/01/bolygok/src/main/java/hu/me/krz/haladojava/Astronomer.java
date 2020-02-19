@@ -16,13 +16,6 @@ public class Astronomer {
 	}
 
 
-	public void observeTheSky() {
-		Planet[] planet = new Planet[10];
-		
-		for (int i = 0; i < planet.length; i++) {
-			
-		}
-	}
 	
 	
 	

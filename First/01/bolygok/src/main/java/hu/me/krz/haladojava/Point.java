@@ -28,5 +28,12 @@ public class Point {
 		Point newPoint = new Point(x + point.x, y + point.y, z + point.z);
 		return newPoint;
 	}
+
+	@Override
+	public String toString() {
+		return "Point [x=" + x + ", y=" + y + ", z=" + z + "]";
+	}
+	
+	
 	
 }
