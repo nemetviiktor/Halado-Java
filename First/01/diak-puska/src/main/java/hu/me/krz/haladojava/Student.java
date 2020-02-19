@@ -11,6 +11,12 @@ public class Student extends Person implements Comparable<Student> {
 		this.cheat = cheat;
 	}
 
+	
+	public int getCheat() {
+		return cheat;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Student [getName=" +getName() + ", cheat=" + cheat + ", getAge()=" + getAge() + "]";
