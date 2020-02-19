@@ -3,24 +3,48 @@ package hu.me.krz.haladojava;
 public class Student {
 
 	private String name;
-	private double money;
+	private int money;
 	private int tanulok;
 	
 	public String getName() {
 		return name;
 	}
-	public double getMoney() {
+	public double penz() {
 		return money;
 	}
 	
-	private Student(String name, double money) {
-		this.name = name;
+	public void setMoney(int money) {
 		this.money = money;
 	}
+	private Student(String name, int money) {
+		this.name = name;
+		this.money = money;
+		this.tanulok++;
+	}
+	public int osszestanulo() {
+		return tanulok;
+	}
+	public Student(String name) {
+		super();
+		this.name = name;
+		this.money = 10000;
+	}
 	
+	@Override
+	public String toString() {
+		return "Tanuló: " + name + " pénz: " + money + " Ft;";
+	}
 	
-	
+	public boolean fogyasztas(int csokkent) {
+		this.money = this.money - csokkent;
+		if (this.money == 0) {
+			return true;
+		}
+		return false;
+	}
+
 	
 	
 
+	
 }
