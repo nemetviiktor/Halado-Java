@@ -4,6 +4,7 @@ public class Student {
 
 	private String name;
 	private double money;
+	private int tanulok;
 	
 	public String getName() {
 		return name;
@@ -12,10 +13,11 @@ public class Student {
 		return money;
 	}
 	
-	public Student(String name, double money) {
+	private Student(String name, double money) {
 		this.name = name;
 		this.money = money;
 	}
+	
 	
 	
 	
