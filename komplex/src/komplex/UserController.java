@@ -9,7 +9,7 @@ public class UserController {
 		int count = 1;
 		
 		for (int i = 0; i < count; i++) {
-			System.out.println(i+1 + ". felhasználó neve (6 karakter, space használata nélkül): ");
+			System.out.print(i+1 + ". felhasználó neve (6 karakter, space használata nélkül): ");
 			Scanner scanner = new Scanner(System.in);
 			String gotName = scanner.nextLine();
 			
