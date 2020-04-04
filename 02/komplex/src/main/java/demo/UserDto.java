@@ -1,3 +1,4 @@
+package demo;
 public class UserDto {
     public UserDto(String name) {
         this.name = name;

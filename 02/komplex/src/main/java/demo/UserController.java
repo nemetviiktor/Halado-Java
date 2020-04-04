@@ -1,3 +1,4 @@
+package demo;
 
 public class UserController {
     UserService userService;

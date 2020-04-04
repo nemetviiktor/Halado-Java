@@ -1,3 +1,4 @@
+package demo;
 public class LengthValidator implements Validator {
     @Override
     public boolean isValid(User user) {
