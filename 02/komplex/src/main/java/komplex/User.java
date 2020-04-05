@@ -22,4 +22,18 @@ public class User {
     public String getNeptunkod() {
         return neptunkod;
     }
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setNeptunkod(String neptunkod) {
+		this.neptunkod = neptunkod;
+	}
+
+	
 }

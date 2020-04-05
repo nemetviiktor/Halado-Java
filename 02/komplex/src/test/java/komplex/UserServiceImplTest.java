@@ -28,46 +28,31 @@ class UserServiceImplTest {
 	}
 	
 	@Test
-	public void saveTest() {
-		List<Validator> validators = new ArrayList<>();
-		
+	void testSaveWithValidTrue(){
 		SpaceValidator sv = mock(SpaceValidator.class);
-		LengthValidator lv = mock(LengthValidator.class);
-		
+		when(sv.isValid(null)).thenReturn(true);
+		List<Validator> validators = new ArrayList<Validator>();
 		validators.add(sv);
-		validators.add(lv);
 		
-		User u = mock(User.class);
+		usi = new UserServiceImpl(um, validators);
 		
-		UserServiceImpl us = new UserServiceImpl(um, validators);
+		usi.save(null);
 		
-		um.save(u);
-		us.save(u);
-		
-		verify(um, times(1)).save(u);
+		verify(um, times(1)).save(null);
 	}
 	
 	@Test
-	public void isValidTest() {
-		
-		List<Validator> validators = new ArrayList<>();
-		
+	void testSaveWithValidFalse(){
 		SpaceValidator sv = mock(SpaceValidator.class);
-		LengthValidator lv = mock(LengthValidator.class);
-		
+		when(sv.isValid(null)).thenReturn(false);
+		List<Validator> validators = new ArrayList<Validator>();
 		validators.add(sv);
-		validators.add(lv);
 		
-		User u = mock(User.class);
+		usi = new UserServiceImpl(um, validators);
 		
-		when(validators.get(0).isValid(u)).thenReturn(true);
+		usi.save(null);
 		
-		assertTrue(validators.get(0).isValid(u));
-		
-		when(validators.get(1).isValid(u)).thenReturn(false);
-		
-		assertFalse(validators.get(1).isValid(u));
-
+		verify(um, times(0)).save(null);
 	}
 
 }

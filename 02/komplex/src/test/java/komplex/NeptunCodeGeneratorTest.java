@@ -7,8 +7,13 @@ import org.junit.jupiter.api.Test;
 class NeptunCodeGeneratorTest {
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	public void getNextCounterTest() {
+		NeptunCodeGenerator ncg = new NeptunCodeGenerator();
+		
+		assertEquals(0, ncg.getNextCounter());
+		
+		ncg.getNextCounter();
+		
 	}
 
 }
