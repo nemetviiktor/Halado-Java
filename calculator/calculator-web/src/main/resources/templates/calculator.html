@@ -2,9 +2,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Calculator</title>
+<style>
+	body{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #031321;
+  font-family: consolas;
+}
+
+a:hover{
+  box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
+}
+
+
+</style>
+
 </head>
 <body>
+
 <form action="/" method="post" th:object="${calc}">
 <input type="number" th:field="*{leftOperand}" th:class="${#fields.hasErrors('leftOperand')} ? fieldError">
     <select class="form-control" name="operator">
@@ -15,7 +35,8 @@
     </select>
     
     <input type="number" th:field="*{rightOperand}" th:class="${#fields.hasErrors('rightOperand')} ? fieldError">
-    <button type="submit" name="action" value="calc">=</button>
+    <a><button type="submit" name="action" value="calc">=</button></a>
 </form>
+
 </body>
 </html>
