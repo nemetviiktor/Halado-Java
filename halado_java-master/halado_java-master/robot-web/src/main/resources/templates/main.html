@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+
+Uvd a robot fo oldalon
+
+Robot allapota
+<span th:text="${robot}">span</span><br/>
+Entitasok
+<ol>
+    <li th:each="entity: ${entities}" >
+        <span th:text="${entity.name}"></span> x:<span th:text="${entity.x}"></span> y:<span th:text="${entity.y}"></span>
+    </li>
+</ol>
+
+Fomenu<br>
+<a href="/move">Robot mozgatas</a><br/>
+<a href="/entity">Entitas felvetele</a>
+
+</body>
+</html>
