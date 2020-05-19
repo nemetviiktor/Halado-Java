@@ -46,7 +46,7 @@ public class MessagesController {
 		return "messages.jsp";
 	}
 	
-	@RequestMapping(value="/selectedUser", method=RequestMethod.GET )
+	@RequestMapping(value="/selectedUser", method=RequestMethod.GET )	// BindingResult bindingResult
 	public ModelAndView getMenu(@RequestParam int id){
 		ModelAndView mv = new ModelAndView("selectedUser.jsp");
 		Users users = usersRepository.findById(id).orElse(new Users());
@@ -60,7 +60,7 @@ public class MessagesController {
 		
 		messagesRepository.save(messages);
 		
-		return "index.jsp";
+		return "index.jsp";							// return new ModelAndView("redirect:/");
 	}
 	
 	
