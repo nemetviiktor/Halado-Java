@@ -21,7 +21,7 @@
             <tr>
                 <input type="hidden" name="fromid" id="fromid" value= "1"/>
                 <input type="hidden" name="toid" id="toid" value= "${users.id}"/>
-                <td><h3>Üzenet szövege: </h3><p><input type="text" name="text" required id="text"/></p></td>
+                <td><h3>Üzenet szövege: (min 5 karakter) </h3><p><input type="text" name="text" required id="text" pattern=".{5,50}"/></p></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -29,6 +29,8 @@
                 </td>
             </tr>
 	</table>
+	
+	<!-- form action="mailto:someone@example.com" method="post" enctype="text/plain" -->
 	
 </body>
 </html>

@@ -2,10 +2,12 @@ package com.java.chat.Controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,13 +27,13 @@ public class MessagesController {
 	@Autowired
 	MessagesRepository messagesRepository;
 	
-	/*
+	
 	@RequestMapping("/")
 	public String Index() {
 		
 		return "index.jsp";
 	}
-	*/
+	
 	
 	public List<Users> getUsers() {
 		List<Users> users = usersRepository.findAll();
@@ -40,14 +42,14 @@ public class MessagesController {
 		
 	}
 	
-	@RequestMapping(value="/",method=RequestMethod.GET)
+	@RequestMapping(value="/send",method=RequestMethod.GET)
 	public String getAllUsers(Model model) {
 		model.addAttribute("users",getUsers());
 		return "messages.jsp";
 	}
 	
 	@RequestMapping(value="/selectedUser", method=RequestMethod.GET )	// BindingResult bindingResult
-	public ModelAndView getMenu(@RequestParam int id){
+	public ModelAndView getUsers(@RequestParam int id){
 		ModelAndView mv = new ModelAndView("selectedUser.jsp");
 		Users users = usersRepository.findById(id).orElse(new Users());
 		mv.addObject(users);
@@ -56,12 +58,29 @@ public class MessagesController {
 	}
 	
 	@RequestMapping("/addMessage")
-	public String addOrder(Messages messages){
+	public ModelAndView addMessage(Messages messages){
 		
 		messagesRepository.save(messages);
 		
-		return "index.jsp";							// return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/");
 	}
 	
+	@RequestMapping(value="/showUsers",method=RequestMethod.GET)
+	public String getAllUser(Model model){
+		model.addAttribute("users",getUsers());
+		return "listUsers.jsp";				
+	}
 	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable("id") int id) {
+        usersRepository.deleteById(id);
+        return "/";
+    }
+	
+	@RequestMapping(value="/showSelected",method=RequestMethod.GET)
+	public String getAllMessagesFindByToid(@RequestParam int toid, Model model){
+			model.addAttribute("messages",messagesRepository.findByToid(toid));
+			return "showSelected.jsp";				
+		}
+
 }
