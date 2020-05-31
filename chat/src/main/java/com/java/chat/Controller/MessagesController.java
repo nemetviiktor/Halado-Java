@@ -34,6 +34,15 @@ public class MessagesController {
 		return "index.jsp";
 	}
 	
+	@RequestMapping("/error")
+	public String handleError() {
+		return "error.jsp";
+	}
+	
+	// @Override
+	public String getErrorPath() {
+		return "/error";
+	}
 	
 	public List<Users> getUsers() {
 		List<Users> users = usersRepository.findAll();
