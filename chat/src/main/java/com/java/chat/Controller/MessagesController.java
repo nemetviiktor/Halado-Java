@@ -72,9 +72,9 @@ public class MessagesController {
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable("id") int id) {
+    public ModelAndView delete(@PathVariable("id") int id) {
         usersRepository.deleteById(id);
-        return "/";
+        return new ModelAndView("redirect:/");
     }
 	
 	@RequestMapping(value="/showSelected",method=RequestMethod.GET)
