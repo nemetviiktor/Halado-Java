@@ -11,22 +11,26 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    
+        <style>
+    body{
+  		  	background-color: grey;
+  	}
+    </style>
 </head>
 <body>
 
 	
 	<table>
-	<c:forEach var="users" items="${users}">
+	<c:forEach var="user" items="${users}">
 	<tr>
-	<td>${users.name}</td>
+	<td>${user.name}</td>
 	<td>
 		<form action="/showSelected">
-		<input type="submit" name="toid" value="${users.id}">
+		<input type="submit" name="toid" value="${user.id}">
 		</form>
 	</td>
 	<td>
-		<form action="/delete/${users.id}">
+		<form action="/delete/${user.id}">
 			<input type="submit" value="Felhasználó törlése"/>
 		</form>
 	</td>

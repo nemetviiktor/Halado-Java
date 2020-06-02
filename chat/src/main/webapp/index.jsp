@@ -14,6 +14,10 @@
   	table{
   	height:100vh;
   	width:100%;
+  	table-layout: fixed;
+  	}
+  	body{
+  		  	background-color: grey;
   	}
   	</style>
 </head>

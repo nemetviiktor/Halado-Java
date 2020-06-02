@@ -21,6 +21,10 @@ import com.java.chat.Model.Users;
 @Controller
 public class MessagesController {
 	
+	
+	// jsp, Bindig result (error) , keltezés dátuma, users helyett user, tests
+	
+	
 	@Autowired
 	UsersRepository usersRepository;
 	
@@ -89,7 +93,7 @@ public class MessagesController {
 	@RequestMapping(value="/showSelected",method=RequestMethod.GET)
 	public String getAllMessagesFindByToid(@RequestParam int toid, Model model){
 			model.addAttribute("messages",messagesRepository.findByToid(toid));
-			return "showSelected.jsp";				
+			return "showSelected.jsp";	
 		}
 
 }

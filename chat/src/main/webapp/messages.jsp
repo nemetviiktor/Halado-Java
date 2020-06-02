@@ -11,23 +11,26 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    
+    <style>
+    body{
+  		  	background-color: grey;
+  	}
+    </style>
 </head>
 <body>
 
 	<h2>Kinek szeretne üzenni?</h2>
 		<form action="selectedUser">
 			<select name='id'>
-    <option value="${selected}" selected>${selected}</option>
-    <c:forEach items="${users}" var="users">
-        <c:if test="${users.id != selected}">
-            <option value="${users.id}">${users.name}</option>
-            <c:set var = "usersId" scope="session" value = "${users.id}"/>
+    <option value="${selected}" selected>Válasszon</option>
+    <c:forEach items="${users}" var="user">
+        <c:if test="${user.id != selected}">
+            <option value="${user.id}">${user.name}</option>
+            <c:set var = "usersId" scope="session" value = "${user.id}"/>
         </c:if>
     </c:forEach>
 	</select>
 				<input type="submit" value="OK">
 	</form>
-	
 </body>
 </html>
