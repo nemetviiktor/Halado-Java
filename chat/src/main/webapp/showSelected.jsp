@@ -13,8 +13,19 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style>
     body{
-  		  	background-color: grey;
+    	background-color: grey;
   	}
+  	table{
+  		table-layout: fixed;
+  	}
+  	th {
+		text-align: center;
+		vertical-align: middle;
+	}
+  	td {
+		text-align: center;
+		vertical-align: middle;
+	}
     </style>
 </head>
 <body>

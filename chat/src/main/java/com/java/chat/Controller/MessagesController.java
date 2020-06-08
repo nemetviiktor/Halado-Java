@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +24,7 @@ import com.java.chat.Model.Users;
 public class MessagesController {
 	
 	
-	// jsp, Bindig result (error), tests
+	// html, Bindig result (error), tests
 	
 	
 	@Autowired
@@ -35,35 +37,20 @@ public class MessagesController {
 	@RequestMapping("/")
 	public String Index() {
 		
-		return "index.jsp";
+		return "index";
 	}
 	
-	@RequestMapping("/error")
-	public String handleError() {
-		return "error.jsp";
+	@GetMapping(value = "/send")
+	public ModelAndView getRoot() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("messages");
+		mav.addObject("users", usersRepository.findAll());
+		return mav;
 	}
 	
-	// @Override
-	public String getErrorPath() {
-		return "/error";
-	}
-	
-	public List<Users> getUsers() {
-		List<Users> users = usersRepository.findAll();
-		
-		return users;
-		
-	}
-	
-	@RequestMapping(value="/send",method=RequestMethod.GET)
-	public String getAllUsers(Model model) {
-		model.addAttribute("users",getUsers());
-		return "messages.jsp";
-	}
-	
-	@RequestMapping(value="/selectedUser", method=RequestMethod.GET )	// BindingResult bindingResult
+	@RequestMapping(value="/selectedUser" )	// BindingResult bindingResult
 	public ModelAndView getUsers(@RequestParam int id){
-		ModelAndView mv = new ModelAndView("selectedUser.jsp");
+		ModelAndView mv = new ModelAndView("selectedUser");
 		Users users = usersRepository.findById(id).orElse(new Users());
 		mv.addObject(users);
 		
@@ -78,9 +65,10 @@ public class MessagesController {
 		return new ModelAndView("redirect:/");
 	}
 	
+	
 	@RequestMapping(value="/showUsers",method=RequestMethod.GET)
 	public String getAllUser(Model model){
-		model.addAttribute("users",getUsers());
+		model.addAttribute("users", usersRepository.findAll());
 		return "listUsers.jsp";				
 	}
 	
