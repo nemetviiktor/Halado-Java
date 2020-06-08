@@ -22,7 +22,7 @@ import com.java.chat.Model.Users;
 public class MessagesController {
 	
 	
-	// jsp, Bindig result (error) , keltezés dátuma, users helyett user, tests
+	// jsp, Bindig result (error), tests
 	
 	
 	@Autowired

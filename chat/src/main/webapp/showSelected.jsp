@@ -18,19 +18,25 @@
     </style>
 </head>
 <body>
-			<table>
-		  	<c:forEach var="messages" items="${messages}">
-			<tr>
-			<td>${messages.text}</td>
-			</tr>
-			</c:forEach>
+		  	
+		  	<table class="table">
+  			<thead>
+    			<tr>
+      			<th scope="col">#</th>
+			     <th scope="col">Üzenet szövege</th>
+			     <th scope="col">Keltezés</th>
+    			</tr>
+			  </thead>
+			  <c:forEach var="message" items="${messages}">
+			  <tbody>
+			    <tr>
+			      <th scope="row">${message.id}</th>
+			      <td>${message.text}</td>
+			      <td>${message.date}</td>
+			    </tr>
+		  	</tbody>
+		  	</c:forEach>
 		  	</table>
-		  	
-		  	
 
-
-	
-	<!-- form action="mailto:someone@example.com" method="post" enctype="text/plain" -->
-	
 </body>
 </html>

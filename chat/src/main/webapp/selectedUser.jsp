@@ -17,6 +17,7 @@
   	}
     </style>
 </head>
+
 <body>
 
 	<h1 align="center">Üzenetküldés ${users.name}-nak/nek</h1>
@@ -25,6 +26,7 @@
             <tr>
                 <input type="hidden" name="fromid" id="fromid" value= "1"/>
                 <input type="hidden" name="toid" id="toid" value= "${users.id}"/>
+                <input type="hidden" id="date" name="date" value="">
                 <td><h3>Üzenet szövege: (min 5 karakter) </h3><p><input type="text" name="text" required id="text" pattern=".{5,50}"/></p></td>
             </tr>
             <tr>
@@ -33,8 +35,9 @@
                 </td>
             </tr>
 	</table>
-	
-	<!-- form action="mailto:someone@example.com" method="post" enctype="text/plain" -->
+	<script>
+	document.getElementById("date").value = Date();
+	</script>
 	
 </body>
 </html>

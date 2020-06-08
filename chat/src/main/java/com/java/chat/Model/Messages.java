@@ -24,6 +24,9 @@ public class Messages {
 	
 	@Column(name="text")
 	private String text;
+	
+	@Column(name="date")
+	private String date;
 
 	public int getId() {
 		return Id;
@@ -56,4 +59,13 @@ public class Messages {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 }
