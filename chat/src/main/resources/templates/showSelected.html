@@ -1,8 +1,5 @@
 <!DOCTYPE html>
- <html xmlns="http://www.w3.org/1999/xhtml" 
-    xmlns:th="http://www.thymeleaf.org" 
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Kezdőlap</title>
@@ -14,7 +11,6 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   	<style>
   	table{
-  	height:100vh;
   	width:100%;
   	table-layout: fixed;
   	}
@@ -25,19 +21,22 @@
 </head>
 <body>
 
-<h1 align="center">Üzenetküldés <span th:text="${users.name}"></span>-nak/nek</h1>
+	<table class="table">
+		<thead>
+    			<tr>
+      				<th scope="col">#</th>
+			     	<th scope="col">Üzenet szövege</th>
+			     	<th scope="col">Keltezés</th>
+    			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="message: ${messages}">
+				<th scope="row" th:text="${message.id}"></th>
+				<td th:text="${message.text}"></td>
+				<td th:text="${message.date}"></td>
+		</tbody>
+	</table>
 
-<form action="/addMessage" method="post">
-    <input type="hidden" name="fromid" th:value="1">
-    <input type="hidden" name="toid" th:value="${users.id}">
-    <input type="hidden" id="date" name="date" value="">
-    <input type="text" name="text" required id="text"/>
-    <button type="submit" name="action">Add</button>
-</form>
 
-
-<script>
-	document.getElementById("date").value = Date();
-	</script>
 </body>
 </html>

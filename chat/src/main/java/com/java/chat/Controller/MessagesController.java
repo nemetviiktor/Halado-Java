@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,12 +49,12 @@ public class MessagesController {
 		return mav;
 	}
 	
+	
 	@RequestMapping(value="/selectedUser" )	// BindingResult bindingResult
 	public ModelAndView getUsers(@RequestParam int id){
 		ModelAndView mv = new ModelAndView("selectedUser");
 		Users users = usersRepository.findById(id).orElse(new Users());
 		mv.addObject(users);
-		
 		return mv;
 	}
 	
@@ -69,11 +70,11 @@ public class MessagesController {
 	@RequestMapping(value="/showUsers",method=RequestMethod.GET)
 	public String getAllUser(Model model){
 		model.addAttribute("users", usersRepository.findAll());
-		return "listUsers.jsp";				
+		return "listUsers";				
 	}
 	
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView delete(@PathVariable("id") int id) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView delete(@RequestParam("id") int id) {
         usersRepository.deleteById(id);
         return new ModelAndView("redirect:/");
     }
@@ -81,7 +82,6 @@ public class MessagesController {
 	@RequestMapping(value="/showSelected",method=RequestMethod.GET)
 	public String getAllMessagesFindByToid(@RequestParam int toid, Model model){
 			model.addAttribute("messages",messagesRepository.findByToid(toid));
-			return "showSelected.jsp";	
-		}
-
+			return "showSelected";	
+	}
 }
