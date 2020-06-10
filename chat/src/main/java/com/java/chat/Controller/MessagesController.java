@@ -45,27 +45,18 @@ public class MessagesController {
 		return "index";
 	}
 	
-	@GetMapping(value = "/send")
-	public ModelAndView getRoot() {
+	
+	@RequestMapping(value = "/send")
+	public ModelAndView getUsers() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("messages");
+		mav.setViewName("sendmessage");
 		mav.addObject("users", usersRepository.findAll());
+		mav.addObject("addmessagedto", new AddMessageDTO());
 		return mav;
 	}
 	
-	
-	@RequestMapping(value="/selectedUser" )	// BindingResult bindingResult
-	public ModelAndView getUsers(@RequestParam int id){
-		ModelAndView mv = new ModelAndView("selectedUser");
-		Users users = usersRepository.findById(id).orElse(new Users());
-		mv.addObject(users);
-		mv.addObject("addmessagedto", new AddMessageDTO());
-		return mv;
-		
-	}
-	
-	@RequestMapping("/addMessage")
-	public ModelAndView addMessage(@Valid @ModelAttribute("addmessagedto") AddMessageDTO addmessagedto, BindingResult bindingResult){
+	@RequestMapping("/addmessage")
+	public ModelAndView addMessage2(@Valid @ModelAttribute("addmessagedto") AddMessageDTO addmessagedto, BindingResult bindingResult){
 
 		if (!bindingResult.hasErrors()) {
 			String date = new Date().toString();
@@ -75,9 +66,8 @@ public class MessagesController {
 		}
 		
 		Users users = usersRepository.findById(addmessagedto.getToid()).orElse(new Users());
-		return new ModelAndView("selectedUser").addObject(users).addObject("addmessagedto", addmessagedto);
+		return new ModelAndView("sendmessage").addObject(users).addObject("addmessagedto", addmessagedto);
 	}
-	
 	
 	@RequestMapping(value="/showUsers",method=RequestMethod.GET)
 	public String getAllUser(Model model){

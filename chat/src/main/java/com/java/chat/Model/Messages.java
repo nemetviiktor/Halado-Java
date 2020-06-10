@@ -77,5 +77,7 @@ public class Messages {
 		this.date = date;
 	}
 
-	
+	public Messages() {
+		super();
+	}
 }

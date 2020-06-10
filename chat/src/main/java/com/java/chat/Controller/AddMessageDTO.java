@@ -5,13 +5,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.NumberFormat;
 
 public class AddMessageDTO {
 	
+	@NumberFormat
+	private Integer toid;
+	
 	@Size(min = 5)
 	private String text;
-	
-	private Integer toid;
 
 	public String getText() {
 		return text;
@@ -28,8 +30,4 @@ public class AddMessageDTO {
 	public void setToid(Integer toid) {
 		this.toid = toid;
 	}
-
-	
-	
-
 }

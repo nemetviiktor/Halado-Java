@@ -1,6 +1,6 @@
 <!DOCTYPE html>
- <html xmlns="http://www.w3.org/1999/xhtml" 
-    xmlns:th="http://www.thymeleaf.org" 
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org" 
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
@@ -21,30 +21,28 @@
   	body{
   		  	background-color: grey;
   	}
-        .fieldError {
+    .fieldError {
             background-color: red;
-        }
+    }
   	</style>
 </head>
 <body>
 
-<h1 align="center">Üzenetküldés <span th:text="${users.name}"></span>-nak/nek</h1>
-
-<form action="/addMessage" method="post" th:object="${addmessagedto}">
-    <input type="hidden" name="fromid" th:value="1">
-    <input type="hidden" name="toid" th:value="${users.id}">
+<h2>Kinek szeretne üzenni?</h2>
+<form action="/addmessage" method="post" th:object="${addmessagedto}">
+	<select  th:field="*{toid}">
+		<option th:each="user : ${users}"
+                            th:value="${user.id}"
+                            th:utext="${user.name}"/> 
+	</select>
+	<input type="hidden" name="fromid" th:value="1">
     <input type="hidden" id="date" name="date" value="">
     <input type="text" th:field="*{text}" th:class="${#fields.hasErrors('text')} ? fieldError"/>
     <ul>
         <li th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></li>
         
     </ul>
-
-    <button type="submit" name="action">Add</button>
+    <input type="submit" value="OK">
 </form>
-
-<script>
-	document.getElementById("date").value = Date();
-	</script>
 </body>
 </html>
