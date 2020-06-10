@@ -68,4 +68,14 @@ public class Messages {
 		this.date = date;
 	}
 
+	public Messages(int id, int fromid, int toid, String text, String date) {
+		super();
+		Id = id;
+		this.fromid = fromid;
+		this.toid = toid;
+		this.text = text;
+		this.date = date;
+	}
+
+	
 }

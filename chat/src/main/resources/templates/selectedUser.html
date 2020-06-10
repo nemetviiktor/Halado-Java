@@ -21,20 +21,27 @@
   	body{
   		  	background-color: grey;
   	}
+        .fieldError {
+            background-color: red;
+        }
   	</style>
 </head>
 <body>
 
 <h1 align="center">Üzenetküldés <span th:text="${users.name}"></span>-nak/nek</h1>
 
-<form action="/addMessage" method="post">
+<form action="/addMessage" method="post" th:object="${addmessagedto}">
     <input type="hidden" name="fromid" th:value="1">
     <input type="hidden" name="toid" th:value="${users.id}">
     <input type="hidden" id="date" name="date" value="">
-    <input type="text" name="text" required id="text"/>
+    <input type="text" th:field="*{text}" th:class="${#fields.hasErrors('text')} ? fieldError"/>
+    <ul>
+        <li th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></li>
+        
+    </ul>
+
     <button type="submit" name="action">Add</button>
 </form>
-
 
 <script>
 	document.getElementById("date").value = Date();

@@ -1,8 +1,11 @@
 package com.java.chat.Controller;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +29,7 @@ import com.java.chat.Model.Users;
 public class MessagesController {
 	
 	
-	// html, Bindig result (error), tests
+	// maven test kívűlről
 	
 	
 	@Autowired
@@ -55,15 +59,23 @@ public class MessagesController {
 		ModelAndView mv = new ModelAndView("selectedUser");
 		Users users = usersRepository.findById(id).orElse(new Users());
 		mv.addObject(users);
+		mv.addObject("addmessagedto", new AddMessageDTO());
 		return mv;
+		
 	}
 	
 	@RequestMapping("/addMessage")
-	public ModelAndView addMessage(Messages messages){
+	public ModelAndView addMessage(@Valid @ModelAttribute("addmessagedto") AddMessageDTO addmessagedto, BindingResult bindingResult){
+
+		if (!bindingResult.hasErrors()) {
+			String date = new Date().toString();
+			Messages message = new Messages(0, 1, addmessagedto.getToid(), addmessagedto.getText(), date);
+			messagesRepository.save(message);
+			return new ModelAndView("redirect:/");
+		}
 		
-		messagesRepository.save(messages);
-		
-		return new ModelAndView("redirect:/");
+		Users users = usersRepository.findById(addmessagedto.getToid()).orElse(new Users());
+		return new ModelAndView("selectedUser").addObject(users).addObject("addmessagedto", addmessagedto);
 	}
 	
 	

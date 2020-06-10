@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.validation.BindingResult;
 
 import com.java.chat.DAO.MessagesRepository;
 import com.java.chat.DAO.UsersRepository;
@@ -21,11 +22,14 @@ public class MessagesControllerTest {
 	private static Users user2;
 	private static MessagesRepository message4;
 	private static UsersRepository user4;
-	private static Messages message1;
-	private static Messages message2;
+	private static AddMessageDTO message1;
+	private static AddMessageDTO message2;
 	
 	@Mock
 	private MessagesRepository messagesRepository;
+	
+	@Mock
+	private AddMessageDTO addmessagedto;
 	
 	@Mock
 	private UsersRepository usersRepository;
@@ -35,8 +39,9 @@ public class MessagesControllerTest {
 	
 	@Test
 	public void addMessage() {
-		messagesController.addMessage(message1);
-		Mockito.verify(messagesRepository, Mockito.times(1)).save(message1);
+		BindingResult bindingResult = null;
+		messagesController.addMessage(message1, bindingResult);
+		Mockito.verify(addmessagedto, Mockito.times(1)).save(message1);
 	}
 
 }
