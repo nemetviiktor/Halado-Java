@@ -15,6 +15,16 @@ public class AddMessageDTO {
 	@Size(min = 5)
 	private String text;
 
+	public AddMessageDTO(Integer toid, @Size(min = 5) String text) {
+		super();
+		this.toid = toid;
+		this.text = text;
+	}
+
+	public AddMessageDTO() {
+		super();
+	}
+
 	public String getText() {
 		return text;
 	}

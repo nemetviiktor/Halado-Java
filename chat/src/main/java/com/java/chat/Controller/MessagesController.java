@@ -56,7 +56,7 @@ public class MessagesController {
 	}
 	
 	@RequestMapping("/addmessage")
-	public ModelAndView addMessage2(@Valid @ModelAttribute("addmessagedto") AddMessageDTO addmessagedto, BindingResult bindingResult){
+	public ModelAndView addMessage(@Valid @ModelAttribute("addmessagedto") AddMessageDTO addmessagedto, BindingResult bindingResult){
 
 		if (!bindingResult.hasErrors()) {
 			String date = new Date().toString();
