@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.java.chat.DAO.MessagesRepository;
-import com.java.chat.DAO.UsersRepository;
-import com.java.chat.Model.Messages;
-import com.java.chat.Model.Users;
+import com.java.chat.Model.Message;
+import com.java.chat.Model.User;
+import com.java.chat.repo.MessageRepository;
+import com.java.chat.repo.UsersRepository;
+import com.java.chat.service.MessageService;
+import com.java.chat.service.MessageServiceImpl;
+import com.java.chat.service.UserService;
 
 @Controller
 public class MessagesController {
 	
-	
-	// maven test kívűlről
-	
+	@Autowired
+	private MessageService messageService;
 	
 	@Autowired
-	UsersRepository usersRepository;
-	
-	@Autowired
-	MessagesRepository messagesRepository;
+	private UserService userService;
 	
 	
 	@RequestMapping("/")
@@ -50,40 +50,42 @@ public class MessagesController {
 	public ModelAndView getUsers() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("sendmessage");
-		mav.addObject("users", usersRepository.findAll());
+		mav.addObject("user", userService.listUsers());
 		mav.addObject("addmessagedto", new AddMessageDTO());
 		return mav;
 	}
 	
-	@RequestMapping("/addmessage")
+	@PostMapping("/addmessage")
 	public ModelAndView addMessage(@Valid @ModelAttribute("addmessagedto") AddMessageDTO addmessagedto, BindingResult bindingResult){
 
 		if (!bindingResult.hasErrors()) {
 			String date = new Date().toString();
-			Messages message = new Messages(0, 1, addmessagedto.getToid(), addmessagedto.getText(), date);
-			messagesRepository.save(message);
+			Message message = new Message(0, 1, addmessagedto.getToid(), addmessagedto.getText(), date);
+			messageService.saveMessage(message);
 			return new ModelAndView("redirect:/");
 		}
 		
-		Users users = usersRepository.findById(addmessagedto.getToid()).orElse(new Users());
-		return new ModelAndView("sendmessage").addObject(users).addObject("addmessagedto", addmessagedto);
+		User user = userService.findById(addmessagedto.getToid()).orElse(new User());
+		return new ModelAndView("sendmessage").addObject(user).addObject("addmessagedto", addmessagedto);
 	}
 	
 	@RequestMapping(value="/showUsers",method=RequestMethod.GET)
 	public String getAllUser(Model model){
-		model.addAttribute("users", usersRepository.findAll());
+		model.addAttribute("users", userService.listUsers());
 		return "listUsers";				
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView delete(@RequestParam("id") int id) {
-        usersRepository.deleteById(id);
+        userService.removeUser(id);
         return new ModelAndView("redirect:/");
     }
 	
+	
 	@RequestMapping(value="/showSelected",method=RequestMethod.GET)
 	public String getAllMessagesFindByToid(@RequestParam int toid, Model model){
-			model.addAttribute("messages",messagesRepository.findByToid(toid));
+			model.addAttribute("messages", messageService.findByToid(toid));
 			return "showSelected";	
 	}
+	
 }

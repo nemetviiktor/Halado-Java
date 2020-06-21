@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.NumberFormat;
 
+
 public class AddMessageDTO {
 	
 	@NumberFormat
@@ -15,14 +16,12 @@ public class AddMessageDTO {
 	@Size(min = 5)
 	private String text;
 
-	public AddMessageDTO(Integer toid, @Size(min = 5) String text) {
-		super();
-		this.toid = toid;
-		this.text = text;
+	public Integer getToid() {
+		return toid;
 	}
 
-	public AddMessageDTO() {
-		super();
+	public void setToid(Integer toid) {
+		this.toid = toid;
 	}
 
 	public String getText() {
@@ -33,11 +32,13 @@ public class AddMessageDTO {
 		this.text = text;
 	}
 
-	public Integer getToid() {
-		return toid;
+	public AddMessageDTO(Integer toid, @Size(min = 5) String text) {
+		super();
+		this.toid = toid;
+		this.text = text;
 	}
 
-	public void setToid(Integer toid) {
-		this.toid = toid;
+	public AddMessageDTO() {
+		super();
 	}
 }

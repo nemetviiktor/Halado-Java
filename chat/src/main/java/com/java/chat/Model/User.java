@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class Users {
+public class User {
 	
 	@Id
 	@Column(name="id")
@@ -46,13 +46,13 @@ public class Users {
 		this.email = email;
 	}
 
-	public Users(int id, String name, String email) {
+	public User(int id, String name, String email) {
 		Id = id;
 		this.name = name;
 		this.email = email;
 	}
 	
-	public Users() {
+	public User() {
 		super();
 	}
 }

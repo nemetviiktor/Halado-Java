@@ -9,12 +9,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="messages")
-public class Messages {
+public class Message {
 	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int Id;
+	private int id;
 	
 	@Column(name="fromid")
 	private int fromid;
@@ -29,11 +29,11 @@ public class Messages {
 	private String date;
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public int getFromid() {
@@ -68,16 +68,16 @@ public class Messages {
 		this.date = date;
 	}
 
-	public Messages(int id, int fromid, int toid, String text, String date) {
+	public Message(int id, int fromid, int toid, String text, String date) {
 		super();
-		Id = id;
+		this.id = id;
 		this.fromid = fromid;
 		this.toid = toid;
 		this.text = text;
 		this.date = date;
 	}
 
-	public Messages() {
+	public Message() {
 		super();
 	}
 }

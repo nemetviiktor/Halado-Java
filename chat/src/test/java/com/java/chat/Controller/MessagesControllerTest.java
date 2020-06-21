@@ -12,23 +12,26 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.validation.BindingResult;
 
-import com.java.chat.DAO.MessagesRepository;
-import com.java.chat.DAO.UsersRepository;
-import com.java.chat.Model.Messages;
-import com.java.chat.Model.Users;
-import com.java.chat.service.MessagesService;
+import com.java.chat.Model.Message;
+import com.java.chat.Model.User;
+import com.java.chat.repo.MessagesRepository;
+import com.java.chat.repo.UsersRepository;
+import com.java.chat.service.MessageService;
 
 @ExtendWith(MockitoExtension.class)
 public class MessagesControllerTest {
 
-	private static Users user1;
-	private static Users user2;
+	private static User user1;
+	private static User user2;
 	private static AddMessageDTO message4;
-	private static Messages message1;
-	private static Messages message2;
+	private static Message message1;
+	private static Message message2;
 	
 	@Mock
-	private MessagesService messagesService;
+	private MessageService messagesService;
+	
+	@Mock
+	private MessagesRepository messagesRepository;
 	
 	@InjectMocks
 	private MessagesController messagesController;
@@ -38,10 +41,10 @@ public class MessagesControllerTest {
 	
 	@BeforeAll
 	public static void init() {
-		user1 = new Users(1, "aa", "test");
-		user2 = new Users(2, "bb", "test2");
-		message1 = new Messages(1, 2, 1, "test", "date");
-		message2 = new Messages(2, 1, 2, "test2", "date2");
+		user1 = new User(1, "aa", "test");
+		user2 = new User(2, "bb", "test2");
+		message1 = new Message(1, 2, 1, "test", "date");
+		message2 = new Message(2, 1, 2, "test2", "date2");
 		message4 = new AddMessageDTO(1, "test4");
 	}
 	

@@ -31,11 +31,10 @@
 <h2>Kinek szeretne üzenni?</h2>
 <form action="/addmessage" method="post" th:object="${addmessagedto}">
 	<select  th:field="*{toid}">
-		<option th:each="user : ${users}"
+		<option th:each="user : ${user}"
                             th:value="${user.id}"
                             th:utext="${user.name}"/> 
 	</select>
-	<input type="hidden" name="fromid" th:value="1">
     <input type="hidden" id="date" name="date" value="">
     <input type="text" th:field="*{text}" th:class="${#fields.hasErrors('text')} ? fieldError"/>
     <ul>
