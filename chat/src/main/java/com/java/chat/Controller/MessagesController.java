@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.java.chat.DTO.AddMessageDTO;
+import com.java.chat.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 import com.java.chat.Model.User;
 import com.java.chat.repo.MessageRepository;
@@ -52,22 +52,20 @@ public class MessagesController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("sendmessage");
 		mav.addObject("user", userService.listUsers());
-		mav.addObject("addmessagedto", new AddMessageDTO());
+		mav.addObject("messageDTO", new MessageDTO());
 		return mav;
 	}
 	
 	@PostMapping("/addmessage")
-	public ModelAndView addMessage(@Valid @ModelAttribute("addmessagedto") AddMessageDTO addmessagedto, BindingResult bindingResult){
+	public ModelAndView addMessage(@Valid @ModelAttribute("addmessagedto") MessageDTO messageDTO, BindingResult bindingResult){
 
 		if (!bindingResult.hasErrors()) {
-			String date = new Date().toString();
-			Message message = new Message(0, 1, addmessagedto.getToid(), addmessagedto.getText(), date);
-			messageService.saveMessage(message);
+			messageService.saveMessage(messageDTO);
 			return new ModelAndView("redirect:/");
 		}
 		
-		User user = userService.findById(addmessagedto.getToid()).orElse(new User());
-		return new ModelAndView("sendmessage").addObject(user).addObject("addmessagedto", addmessagedto);
+		User user = userService.findById(messageDTO.getToid()).orElse(new User());
+		return new ModelAndView("sendmessage").addObject(user).addObject("messageDTO", messageDTO);
 	}
 	
 	@RequestMapping(value="/showUsers",method=RequestMethod.GET)

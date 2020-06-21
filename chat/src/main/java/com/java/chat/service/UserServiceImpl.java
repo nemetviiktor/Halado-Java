@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.java.chat.DTO.AddMessageDTO;
+import com.java.chat.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 import com.java.chat.Model.User;
 import com.java.chat.repo.MessageRepository;
