@@ -1,4 +1,4 @@
-package com.java.chat.Controller;
+package com.java.chat.DTO;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;

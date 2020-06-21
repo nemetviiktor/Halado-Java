@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.java.chat.DTO.AddMessageDTO;
 import com.java.chat.Model.Message;
 import com.java.chat.Model.User;
 import com.java.chat.repo.MessageRepository;

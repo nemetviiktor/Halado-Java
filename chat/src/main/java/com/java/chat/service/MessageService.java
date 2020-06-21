@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.java.chat.Controller.AddMessageDTO;
+import com.java.chat.DTO.AddMessageDTO;
 import com.java.chat.Model.Message;
 
 public interface MessageService {
