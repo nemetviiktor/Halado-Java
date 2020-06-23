@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.java.chat.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 
+@Service
 public interface MessageService {
 	
 	public Message saveMessage(MessageDTO messageDTO);

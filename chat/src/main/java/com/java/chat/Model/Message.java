@@ -73,7 +73,7 @@ public class Message {
 		this.date = date;
 	}
 
-	public Message(int id, int fromid, int toid, String text, String date) {
+	public Message(int id, int fromid, int toid, @Size(min = 5) String text, String date) {
 		super();
 		this.id = id;
 		this.fromid = fromid;

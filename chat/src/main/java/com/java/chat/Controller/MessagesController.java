@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.chat.DTO.MessageDTO;
@@ -46,7 +47,6 @@ public class MessagesController {
 		return "index";
 	}
 	
-	
 	@RequestMapping(value = "/send")
 	public ModelAndView getUsers() {
 		ModelAndView mav = new ModelAndView();
@@ -57,7 +57,7 @@ public class MessagesController {
 	}
 	
 	@PostMapping("/addmessage")
-	public ModelAndView addMessage(@Valid @ModelAttribute("addmessagedto") MessageDTO messageDTO, BindingResult bindingResult){
+	public ModelAndView addMessage(@Valid @ModelAttribute("messageDTO") MessageDTO messageDTO, BindingResult bindingResult){
 
 		if (!bindingResult.hasErrors()) {
 			messageService.saveMessage(messageDTO);
@@ -76,10 +76,13 @@ public class MessagesController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView delete(@RequestParam("id") int id) {
+		Optional<User> user = userService.findById(id);
+		if (!user.isPresent()) {
+			return new ModelAndView("error");
+		}
         userService.removeUser(id);
         return new ModelAndView("redirect:/");
     }
-	
 	
 	@RequestMapping(value="/showSelected",method=RequestMethod.GET)
 	public String getAllMessagesFindByToid(@RequestParam int toid, Model model){

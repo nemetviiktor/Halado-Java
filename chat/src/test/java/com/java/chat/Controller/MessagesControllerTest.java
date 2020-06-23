@@ -1,6 +1,6 @@
 package com.java.chat.Controller;
 
-import static org.junit.Assert.*;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,8 @@ import org.springframework.validation.BindingResult;
 import com.java.chat.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 import com.java.chat.Model.User;
-import com.java.chat.repo.MessageRepository;
 import com.java.chat.service.MessageService;
+import com.java.chat.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 public class MessagesControllerTest {
@@ -31,7 +31,7 @@ public class MessagesControllerTest {
 	private MessageService messageService;
 	
 	@Mock
-	private MessageRepository messageRepository;
+	private UserService userService;
 	
 	@InjectMocks
 	private MessagesController messagesController;
@@ -42,16 +42,27 @@ public class MessagesControllerTest {
 	@BeforeAll
 	public static void init() {
 		user1 = new User(1, "aa", "test");
-		user2 = new User(2, "bb", "test2");
 		message1 = new Message(1, 2, 1, "test", "date");
-		message2 = new Message(2, 1, 2, "test2", "date2");
-		message4 = new MessageDTO(1, "test4");
+		message4 = new MessageDTO(1, "Teszt", "2020.06.21.");
 	}
 	
 	@Test
-	public void addMessage() {
-		messagesController.addMessage(message1, bindingResult);
-		Mockito.verify(messageService, Mockito.times(1)).saveMessage(message1);
+	public void addMessageTest() {
+		messagesController.addMessage(message4, bindingResult);
+		Mockito.verify(messageService, Mockito.times(1)).saveMessage(message4);
 	}
-
+	
+	@Test
+	public void deleteUserWhenFound() {
+		Mockito.when(userService.findById(1)).thenReturn(Optional.of(user1));
+		messagesController.delete(1);
+		Mockito.verify(userService, Mockito.times(1)).removeUser(1);
+	}
+	
+	@Test
+	public void deleteUserWhenNotFound() {
+		Mockito.when(userService.findById(1)).thenReturn(Optional.empty());
+		messagesController.delete(1);
+		Mockito.verify(userService, Mockito.times(0)).removeUser(1);
+	}
 }
