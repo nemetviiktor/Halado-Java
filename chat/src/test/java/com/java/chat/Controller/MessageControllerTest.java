@@ -19,7 +19,7 @@ import com.java.chat.service.MessageService;
 import com.java.chat.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
-public class MessagesControllerTest {
+public class MessageControllerTest {
 
 	private static User user1;
 	private static User user2;
@@ -34,7 +34,7 @@ public class MessagesControllerTest {
 	private UserService userService;
 	
 	@InjectMocks
-	private MessagesController messagesController;
+	private MessageController messagesController;
 	
 	@MockBean
 	private BindingResult bindingResult;

@@ -32,7 +32,7 @@ import com.java.chat.service.MessageServiceImpl;
 import com.java.chat.service.UserService;
 
 @Controller
-public class MessagesController {
+public class MessageController {
 	
 	@Autowired
 	private MessageService messageService;
