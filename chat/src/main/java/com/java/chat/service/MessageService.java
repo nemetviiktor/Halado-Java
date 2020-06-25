@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.stereotype.Service;
 
-import com.java.chat.DTO.MessageDTO;
+import com.java.chat.Controller.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 
 @Service

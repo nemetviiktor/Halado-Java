@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.java.chat.DTO.MessageDTO;
+import com.java.chat.Controller.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 
 @Repository

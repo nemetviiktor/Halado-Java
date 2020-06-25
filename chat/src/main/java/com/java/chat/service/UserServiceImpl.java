@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.java.chat.DTO.MessageDTO;
+import com.java.chat.Controller.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 import com.java.chat.Model.User;
 import com.java.chat.repo.MessageRepository;
@@ -15,8 +15,13 @@ import com.java.chat.repo.UsersRepository;
 @Service
 public class UserServiceImpl implements UserService {
 	
-	@Autowired
 	private UsersRepository userRepository;
+	
+	
+	@Autowired
+	public void setUserRepository(UsersRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	@Override
 	public List<User> listUsers() {

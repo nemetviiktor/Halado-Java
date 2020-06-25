@@ -2,7 +2,6 @@ package com.java.chat.Controller;
 
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -11,34 +10,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.java.chat.DTO.MessageDTO;
-import com.java.chat.Model.Message;
+import com.java.chat.Controller.DTO.MessageDTO;
 import com.java.chat.Model.User;
-import com.java.chat.repo.MessageRepository;
-import com.java.chat.repo.UsersRepository;
 import com.java.chat.service.MessageService;
-import com.java.chat.service.MessageServiceImpl;
 import com.java.chat.service.UserService;
 
 @Controller
 public class MessageController {
 	
-	@Autowired
 	private MessageService messageService;
+	private UserService userService;
+	
 	
 	@Autowired
-	private UserService userService;
+	public void setMessageService(MessageService messageService) {
+		this.messageService = messageService;
+	}
+
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	
 	
 	@RequestMapping("/")
@@ -58,8 +58,10 @@ public class MessageController {
 	
 	@PostMapping("/addmessage")
 	public ModelAndView addMessage(@Valid @ModelAttribute("messageDTO") MessageDTO messageDTO, BindingResult bindingResult){
-
+		
 		if (!bindingResult.hasErrors()) {
+			String date = new Date().toString();
+			messageDTO.setDate(date);
 			messageService.saveMessage(messageDTO);
 			return new ModelAndView("redirect:/");
 		}

@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.validation.BindingResult;
 
-import com.java.chat.DTO.MessageDTO;
+import com.java.chat.Controller.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 import com.java.chat.Model.User;
 import com.java.chat.service.MessageService;

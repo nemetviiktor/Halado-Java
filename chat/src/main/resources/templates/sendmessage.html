@@ -35,7 +35,6 @@
                             th:value="${user.id}"
                             th:utext="${user.name}"/> 
 	</select>
-	<input type="hidden" th:field="*{date}"/>
     <input type="text" th:field="*{text}" th:class="${#fields.hasErrors('text')} ? fieldError"/>
     <ul>
         <li th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></li>
@@ -43,10 +42,6 @@
     </ul>
     <input type="submit" value="OK">
 </form>
-
-<script>
-	document.getElementById("date").value = Date();
-	</script>
 
 </body>
 </html>

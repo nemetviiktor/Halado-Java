@@ -1,4 +1,4 @@
-package com.java.chat.DTO;
+package com.java.chat.Controller.DTO;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +17,6 @@ public class MessageDTO {
 	@Size(min = 5)
 	private String text;
 	
-	@NotNull
 	private String date;
 
 	public Integer getToid() {
@@ -44,7 +43,7 @@ public class MessageDTO {
 		this.date = date;
 	}
 
-	public MessageDTO(Integer toid, @Size(min = 5) String text, @NotNull String date) {
+	public MessageDTO(Integer toid, @Size(min = 5) String text, String date) {
 		super();
 		this.toid = toid;
 		this.text = text;

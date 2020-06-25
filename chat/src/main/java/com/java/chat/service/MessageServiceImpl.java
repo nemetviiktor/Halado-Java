@@ -5,21 +5,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.java.chat.DTO.MessageDTO;
+import com.java.chat.Controller.DTO.MessageDTO;
 import com.java.chat.Model.Message;
 import com.java.chat.repo.MessageRepository;
 
 @Service
 public class MessageServiceImpl implements MessageService {
 	
-	@Autowired
+	
 	private MessageRepository messageRepository;
+	
+	@Autowired
+	public void setMessageRepository(MessageRepository messageRepository) {
+		this.messageRepository = messageRepository;
+	}
 
 	@Override
 	public Message saveMessage(MessageDTO messageDTO) {
 		return messageRepository.save(convertAddMessageDTOtoMessage(messageDTO));
 	}
-
+	
 	@Override
 	public List<Message> findByToid(Integer toid) {
 		return messageRepository.findByToid(toid);
